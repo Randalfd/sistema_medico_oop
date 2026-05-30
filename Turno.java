@@ -2,83 +2,106 @@ package SistemaMedico;
 
 import java.util.*;
 
-public class Turno {
-	private Paciente paciente;
-	private Medico medico;
-	private DetallesTurno detallesTurno;
-	private Date ingreso;
-	private Date salida = null;
-	private boolean terminado = false;
-	private double precio;	 
-	
-	public Turno(Paciente paciente, Medico medico) {
-		this.paciente = paciente;
-		this.medico = medico;
-		this.ingreso = ingreso;
-		this.precio = precio;
-		this.detallesTurno = new DetallesTurno();
-	}
-	
-	// este metodo tiene funcionalidad desde antes del aviso que solo presentara un mensaje.
-	public void terminarTurno(double pago) {
-		if(this.terminado) { 
-			System.out.println("El turno ya esta termiado");
-		} else if(paciente.pagarTurno(this, pago)){ 
-			this.salida = new Date();
-			this.terminado = true;
-		}
-		
-	}
-	
-	public void estadoTurno(){
-		System.out.println("El estado del turno es...");
-	}
-	
-	public Paciente getPaciente(){
-		return this.paciente;
-	}
-	
-	public void setPaciente(Paciente paciente){
-		this.paciente = paciente;
-	}
-	
-	public Medico getMedico(){
-		return this.medico;
-	}
-	
-	public void setMedico(Medico medico){
-		this.medico = medico;
-	}
-	
-	public Date getIngreso(){
-		return this.ingreso;
-	}
-	
-	public void setIngeso(Date ingreso){
-		this.ingreso = ingreso;
-	}
-	
-	public Date getSalida(){
-		return this.salida;
-	}
-	
-	public void setSalida(Date salida){
-		this.salida = salida;
-	}
-	
-	public boolean isTerminado(){
-		return this.terminado;
-	}
-	
-	public void setTerminado(boolean terminado){
-		this.terminado = terminado;
-	}
-	
-	public double getPrecio(){
-		return this.precio;
-	}
-	
-	public void setPrecio(double precio){
-		this.precio = precio;
-	}
+import java.time.LocalDateTime;
+import java.time.LocalDate;
+import java.time.LocalTime;
+
+public class Turno implements IAtencionMedica {
+  private Paciente paciente;
+  private Medico medico;
+  private DetallesTurno detallesTurno;
+  private LocalDateTime ingreso;
+  private LocalDateTime salida = null;
+  private boolean terminado = false;
+  private double precio;
+
+  public Turno(Paciente paciente, Medico medico, double precio) {
+    this.paciente = paciente;
+    this.medico = medico;
+    this.ingreso = LocalDateTime.now();
+    this.precio = precio;
+    this.detallesTurno = new DetallesTurno();
+  }
+
+  // este metodo tiene funcionalidad desde antes del aviso que solo presentara un
+  // mensaje.
+  public void terminarTurno(double pago) {
+    if (this.terminado) {
+      System.out.println("El turno ya esta termiado");
+    } else if (paciente.pagarTurno(this, pago)) {
+      this.salida = LocalDateTime.now();
+      this.terminado = true;
+    }
+
+  }
+
+  public void estadoTurno() {
+    System.out.println("El estado del turno es...");
+  }
+
+  @Override
+  public Paciente getPaciente() {
+    return this.paciente;
+  }
+
+  public void setPaciente(Paciente paciente) {
+    this.paciente = paciente;
+  }
+
+  @Override
+  public LocalDateTime getDateTime() {
+    return this.ingreso;
+  }
+
+  @Override
+  public Medico getMedico() {
+    return this.medico;
+  }
+
+  public void setMedico(Medico medico) {
+    this.medico = medico;
+  }
+
+  @Override
+  public Especialidad getEspecialidad() {
+    return getMedico().getEspecialidad();
+  }
+
+  @Override
+  public void cancel() {
+    System.out.println("Cancelando Turno");
+  }
+
+  @Override
+  public void changeDateTime(LocalDateTime newDateTime) {
+    System.out.println("reprogramando turno a" + newDateTime.toString());
+  }
+
+  public void setIngeso(LocalDateTime ingreso) {
+    this.ingreso = ingreso;
+  }
+
+  public LocalDateTime getSalida() {
+    return this.salida;
+  }
+
+  public void setSalida(LocalDateTime salida) {
+    this.salida = salida;
+  }
+
+  public boolean isTerminado() {
+    return this.terminado;
+  }
+
+  public void setTerminado(boolean terminado) {
+    this.terminado = terminado;
+  }
+
+  public double getPrecio() {
+    return this.precio;
+  }
+
+  public void setPrecio(double precio) {
+    this.precio = precio;
+  }
 }
