@@ -3,6 +3,7 @@ package SistemaMedico;
 import java.util.*;
 
 public class DetallesTurno {
+
     private String diagnostico;
     private List<String> medicamentos;
 
@@ -33,12 +34,12 @@ public class DetallesTurno {
     public void setMedicamentos(List<String> medicamentos) {
         this.medicamentos = new ArrayList<>(medicamentos);
     }
-    
-    public void removeMedicamentoByIndex(int index) {
-			this.medicamentos.remove(index);
-		}
 
-		// simulando prueba unitaria con un main
+    public void removeMedicamentoByIndex(int index) {
+        this.medicamentos.remove(index);
+    }
+
+    // simulando prueba unitaria con un main
     public static void main(String[] args) {
         var turn_details = new DetallesTurno();
 
@@ -46,12 +47,12 @@ public class DetallesTurno {
         turn_details.addMedicamento("test1");
         turn_details.addMedicamento("test2");
         turn_details.removeMedicamentoByIndex(1);
-        
+
         System.out.println(turn_details.getMedicamentos());
-        
+
         // recorrido con un foreach
-        for(String e : turn_details.getMedicamentos()) {
-					System.out.println(e);
-				}
+        for (String e : turn_details.getMedicamentos()) {
+            System.out.println(e);
+        }
     }
 }

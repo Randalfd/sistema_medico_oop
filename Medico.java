@@ -8,10 +8,10 @@ public class Medico extends Persona {
   private Date ingreso;
 
   public Medico(Especialidad especialidad, double salario, Date ingreso, String nombre, String apellido, int DNI) {
+    super(nombre, apellido, DNI);
     this.especialidad = especialidad;
     this.salario = salario;
     this.ingreso = ingreso;
-    super(nombre, apellido, DNI);
   }
 
   // Sin probar la funcionalidad, concretametne

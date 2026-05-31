@@ -23,12 +23,21 @@ public class Turno implements IAtencionMedica {
     this.detallesTurno = new DetallesTurno();
   }
 
-  // este metodo tiene funcionalidad desde antes del aviso que solo presentara un
-  // mensaje.
+	public boolean pagarTurno(double pago) {
+		System.out.println("pagando turno");
+		if(this.precio <= pago) {
+			System.out.println("Turno pagado");
+			return true;
+		} else {
+			System.out.println("Pago insuficiente");
+			return false;
+		}
+	}
+
   public void terminarTurno(double pago) {
     if (this.terminado) {
       System.out.println("El turno ya esta termiado");
-    } else if (paciente.pagarTurno(this, pago)) {
+    } else if (this.pagarTurno(pago)) {
       this.salida = LocalDateTime.now();
       this.terminado = true;
     }
@@ -64,7 +73,7 @@ public class Turno implements IAtencionMedica {
 
   @Override
   public Especialidad getEspecialidad() {
-    return getMedico().getEspecialidad();
+    return this.medico.getEspecialidad();
   }
 
   @Override
@@ -77,7 +86,7 @@ public class Turno implements IAtencionMedica {
     System.out.println("reprogramando turno a" + newDateTime.toString());
   }
 
-  public void setIngeso(LocalDateTime ingreso) {
+  public void setIngreso(LocalDateTime ingreso) {
     this.ingreso = ingreso;
   }
 

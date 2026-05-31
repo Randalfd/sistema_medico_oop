@@ -14,18 +14,6 @@ public class Paciente extends Persona {
 		super(nombre,apellido,DNI);
 	}
 	
-	// este metodo tiene funcionalidad desde antes del aviso que solo presentara un mensaje.
-	public boolean pagarTurno(Turno turno, double pago) {
-		System.out.println("pagando turno");
-		if(turno.getPrecio() <= pago) {
-			System.out.println("Turno pagado");
-			return true;
-		} else {
-			System.out.println("Pago insuficiente");
-			return false;
-		}
-	}
-	
 	// probando etiquetas
 	@Override
 	public void saludar(){
@@ -40,7 +28,6 @@ public class Paciente extends Persona {
 	public void explicarSintomas(){
 		System.out.printf("Mis sintomas son %s %n", this.sintomas);
 	}
-
 	
 	public int getPeso(){
 		return this.peso;
